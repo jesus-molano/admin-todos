@@ -1,28 +1,28 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { createTodo, deleteCompletedTodos } from "@/todos/actions/todo-actions";
+// import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import prisma from "@/lib/prisma";
-import * as todosApi from "@/todos/helpers/todos";
+// import * as todosApi from "@/todos/helpers/todos";
 
 export const NewTodo = () => {
   const [description, setDescription] = useState("");
-  const router = useRouter();
+  // const router = useRouter();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!description) return;
     if (description.trim() === "") return;
-    todosApi.createTodo(description);
+    await createTodo(description);
     setDescription("");
-    router.refresh();
+    // router.refresh();
   };
 
-  const onDeleteCompleted = async () => {
-    await todosApi.deleteCompletedTodos();
-    router.refresh();
-  };
+  // const onDeleteCompleted = async () => {
+  // await todosApi.deleteCompletedTodos();
+  // router.refresh();
+  // };
 
   return (
     <form className="flex w-full" onSubmit={onSubmit}>
@@ -44,7 +44,7 @@ export const NewTodo = () => {
       <span className="flex flex-1"></span>
 
       <button
-        onClick={() => onDeleteCompleted()}
+        onClick={() => deleteCompletedTodos()}
         type="button"
         className="flex gap-1 items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all"
       >
