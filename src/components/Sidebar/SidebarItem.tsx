@@ -5,22 +5,22 @@ import React from "react";
 interface SidebarItemsProps {
   title: string;
   icon?: React.ReactNode;
-  url: string;
+  path: string;
 }
 
-export const SidebarItem = ({ title, icon, url }: SidebarItemsProps) => {
+export const SidebarItem = ({ title, icon, path }: SidebarItemsProps) => {
   const currentPath = usePathname();
-  console.log("current", currentPath);
-  console.log("props", url);
+
   return (
     <li>
       <Link
-        href={url}
+        href={path}
         className={`
           relative px-4 py-3 flex items-center space-x-4 rounded-xl 
           ${
-            currentPath === url &&
-            "text-white bg-gradient-to-r from-sky-600 to-cyan-400 "
+            currentPath === path
+              ? "text-white bg-gradient-to-r from-sky-600 to-cyan-400 hover:bg-gradient-to-r hover:from-sky-600 hover:to-cyan-400 hover:text-white "
+              : "hover:bg-gradient-to-r hover:from-gray-200 hover:to-cyan-100 hover:text-gray-900"
           }
         `}
       >

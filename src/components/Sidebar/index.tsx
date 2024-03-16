@@ -1,19 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { CiBookmarkCheck, CiLogout } from "react-icons/ci";
+import { CiLogout } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
+import {
+  IoCalendarOutline,
+  IoCheckboxOutline,
+  IoListOutline,
+} from "react-icons/io5";
 
 const SIDEBAR_ITEMS = [
   {
     title: "Dashboard",
-    url: "/dashboard",
-    icon: <CiBookmarkCheck size={30} />,
+    path: "/dashboard",
+    icon: <IoCalendarOutline size={30} />,
   },
   {
-    title: "Categories",
-    url: "/dashboard/rest-todos",
-    icon: <CiBookmarkCheck size={30} />,
+    title: "Rest TODOS",
+    path: "/dashboard/rest-todos",
+    icon: <IoCheckboxOutline size={30} />,
+  },
+  {
+    title: "Server Actions",
+    path: "/dashboard/server-todos",
+    icon: <IoListOutline size={30} />,
   },
 ];
 
@@ -25,7 +35,7 @@ export const Sidebar = () => {
           <Link href="/dashboard" title="home">
             <Image
               src="https://tailus.io/sources/blocks/stats-cards/preview/images/logo.svg"
-              className="w-32"
+              className="w-32 h-[32px]"
               alt="tailus logo"
               width={128}
               height={32}
@@ -38,8 +48,8 @@ export const Sidebar = () => {
             src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
             alt=""
             className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
-            width={40}
-            height={40}
+            width={112}
+            height={112}
           />
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             Cynthia J. Watts
@@ -52,7 +62,7 @@ export const Sidebar = () => {
             <SidebarItem
               key={item.title}
               title={item.title}
-              url={item.url}
+              path={item.path}
               icon={item.icon}
             />
           ))}
