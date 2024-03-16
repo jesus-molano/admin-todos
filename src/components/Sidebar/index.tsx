@@ -7,6 +7,7 @@ import {
   IoCalendarOutline,
   IoCheckboxOutline,
   IoListOutline,
+  IoSaveOutline,
 } from "react-icons/io5";
 
 const SIDEBAR_ITEMS = [
@@ -24,6 +25,11 @@ const SIDEBAR_ITEMS = [
     title: "Server Actions",
     path: "/dashboard/server-todos",
     icon: <IoListOutline size={30} />,
+  },
+  {
+    title: "Cookies",
+    path: "/dashboard/cookies",
+    icon: <IoSaveOutline size={30} />,
   },
 ];
 
