@@ -4,6 +4,7 @@ import React from "react";
 import { CiLogout } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
 import {
+  IoBasketOutline,
   IoCalendarOutline,
   IoCheckboxOutline,
   IoListOutline,
@@ -30,6 +31,11 @@ const SIDEBAR_ITEMS = [
     title: "Cookies",
     path: "/dashboard/cookies",
     icon: <IoSaveOutline size={30} />,
+  },
+  {
+    title: "Products",
+    path: "/dashboard/products",
+    icon: <IoBasketOutline size={30} />,
   },
 ];
 
