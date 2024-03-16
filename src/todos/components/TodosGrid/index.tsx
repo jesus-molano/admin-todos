@@ -3,23 +3,25 @@ import { Todo } from "@prisma/client";
 import React from "react";
 import { TodosItem } from "../..";
 
-import * as todosApi from "@/todos/helpers/todos";
-import { useRouter } from "next/navigation";
+// import * as todosApi from "@/todos/helpers/todos";
+// import { useRouter } from "next/navigation";
+import { toggleTodo } from "@/todos/actions/todo-actions";
 
 interface TodosGridProps {
   todos?: Todo[];
 }
 
 export const TodosGrid = ({ todos = [] }: TodosGridProps) => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const toggleTodo = async (id: string, completed: boolean) => {
-    const updatedTodo = await todosApi.updateTodo(id, completed);
-    console.log(updatedTodo);
-    router.refresh();
-  };
+  // const toggleTodo = async (id: string, completed: boolean) => {
+  //   const updatedTodo = await todosApi.updateTodo(id, completed);
+  //   console.log(updatedTodo);
+  //   router.refresh();
+  // };
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-2">
       {todos.map((todo) => (
         <TodosItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />
       ))}
