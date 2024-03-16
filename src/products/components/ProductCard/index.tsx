@@ -1,6 +1,12 @@
+"use client";
 import Image from "next/image";
 import { IoAddCircleOutline, IoTrashOutline } from "react-icons/io5";
 import { Star } from "../Star";
+import {
+  addProductToCart,
+  deleteProductFromCart,
+} from "@/shopping-cart/actions/cart-actions";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   id: string;
@@ -17,6 +23,17 @@ export const ProductCard = ({
   rating,
   image,
 }: ProductCardProps) => {
+  const router = useRouter();
+
+  const onAddToCart = () => {
+    addProductToCart(id);
+    router.refresh();
+  };
+
+  const onDeleteFromCart = () => {
+    deleteProductFromCart(id);
+    router.refresh();
+  };
   return (
     <div className="bg-white shadow-xl rounded-lg max-w-sm border-blue-900">
       {/* Product Image */}
@@ -53,13 +70,21 @@ export const ProductCard = ({
 
         {/* Price and Add to Cart */}
         <div className="flex gap-1 items-center justify-between">
-          <span className="text-xl font-bold text-gray-900 ">$599</span>
+          <span className="text-xl font-bold text-gray-900 ">
+            {price.toFixed(2)}$
+          </span>
 
           <div className="flex">
-            <button className="text-white mr-2 bg-gradient-to-r from-sky-400 to-sky-700  focus:ring-4 focus:ring-blue-300 hover:opacity-65 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+            <button
+              onClick={onAddToCart}
+              className="text-white mr-2 bg-gradient-to-r from-sky-400 to-sky-700  focus:ring-4 focus:ring-blue-300 hover:opacity-65 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+            >
               <IoAddCircleOutline size={25} />
             </button>
-            <button className="text-white bg-rose-500 hover:bg-rose-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+            <button
+              onClick={onDeleteFromCart}
+              className="text-white bg-rose-500 hover:bg-rose-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+            >
               <IoTrashOutline size={20} />
             </button>
           </div>
