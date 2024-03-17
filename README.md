@@ -17,6 +17,11 @@ docker compose up -d
    ```
 7. Ejecutar el SEED para [crear la base de datos local](localhost:3000/api/seed)
 
+
+# Notes
+__default user__: test1@email.com
+__default password__: 123456
+
 # Prisma commands
 ```
 npx prisma init

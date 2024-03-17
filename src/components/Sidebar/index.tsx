@@ -1,54 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { CiLogout } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
-import {
-  IoBasketOutline,
-  IoCalendarOutline,
-  IoCheckboxOutline,
-  IoListOutline,
-  IoSaveOutline,
-} from "react-icons/io5";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-
-const SIDEBAR_ITEMS = [
-  {
-    title: "Dashboard",
-    path: "/dashboard",
-    icon: <IoCalendarOutline size={30} />,
-  },
-  {
-    title: "Rest TODOS",
-    path: "/dashboard/rest-todos",
-    icon: <IoCheckboxOutline size={30} />,
-  },
-  {
-    title: "Server Actions",
-    path: "/dashboard/server-todos",
-    icon: <IoListOutline size={30} />,
-  },
-  {
-    title: "Cookies",
-    path: "/dashboard/cookies",
-    icon: <IoSaveOutline size={30} />,
-  },
-  {
-    title: "Products",
-    path: "/dashboard/products",
-    icon: <IoBasketOutline size={30} />,
-  },
-];
+import { SIDEBAR_ITEMS } from "@/utils/constants";
+import { LogoutButton } from "./LogoutButton";
 
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
   const user = {
     name: session?.user?.name ?? "John Doe",
-    // role: session?.user?.role ?? 'User',
+    roles: session?.user?.roles ?? ["user"],
     avatarUrl:
       session?.user?.image ??
-      "https://tailus.io/sources/blocks/stats-cards/preview/images/first_user.webp",
+      "https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp",
   };
 
   return (
@@ -77,7 +43,9 @@ export const Sidebar = async () => {
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             {user.name}
           </h5>
-          <span className="hidden text-gray-400 lg:block">Admin</span>
+          <span className="hidden text-gray-400 lg:block capitalize">
+            {user.roles.join(" | ")}
+          </span>
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8">
@@ -93,10 +61,7 @@ export const Sidebar = async () => {
       </div>
 
       <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-        <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-          <CiLogout />
-          <span className="group-hover:text-gray-700">Logout</span>
-        </button>
+        <LogoutButton />
       </div>
     </aside>
   );
